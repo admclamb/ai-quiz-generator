@@ -1,2 +1,4 @@
-package com.aiquizgenerator.backend.generator.controller;public class GeneratorController {
+package com.aiquizgenerator.backend.generator.controller;
+
+public class GeneratorController {
 }
