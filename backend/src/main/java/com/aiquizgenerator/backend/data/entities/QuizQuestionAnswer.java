@@ -11,5 +11,9 @@ public class QuizQuestionAnswer {
     @Column(name = "id")
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "quiz_question_id")
+    private QuizQuestion quizQuestion;
+
     private String answer;
 }

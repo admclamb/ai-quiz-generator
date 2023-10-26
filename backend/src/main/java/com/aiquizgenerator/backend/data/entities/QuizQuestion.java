@@ -14,10 +14,13 @@ public class QuizQuestion {
 
     private String question;
 
+    @ManyToOne
+    @JoinColumn(name = "quiz_id")
+    private Quiz quiz;
 
-    @OneToMany(mappedBy = "quiz_question")
+    @OneToMany(mappedBy = "quizQuestion")
     private Set<QuizQuestionAnswer> answers;
 
-    @OneToOne(mappedBy = "quiz_question")
+    @OneToOne(mappedBy = "quizQuestion")
     private QuizQuestionAnswer correctAnswer;
 }
