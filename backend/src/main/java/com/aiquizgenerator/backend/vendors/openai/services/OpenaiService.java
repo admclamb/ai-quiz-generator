@@ -36,8 +36,6 @@ public class OpenaiService {
         prompt.setResponseToJson();
         ChatRequestDTO request = new ChatRequestDTO(model, prompt.build());
 
-
-
         ChatResponseDTO response = restTemplate.postForObject(apiUrl, request, ChatResponseDTO.class);
 
         if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {

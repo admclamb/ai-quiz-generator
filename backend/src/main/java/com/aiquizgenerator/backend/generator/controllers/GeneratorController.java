@@ -6,10 +6,7 @@ import com.aiquizgenerator.backend.generator.services.GeneratorService;
 import com.aiquizgenerator.backend.vendors.openai.services.OpenaiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 
@@ -21,6 +18,12 @@ public class GeneratorController {
     private final GeneratorService generatorService;
 
     private final OpenaiService openaiService;
+
+    @GetMapping()
+    public String test() {
+        System.out.println("TEST");
+        return "This is a test";
+    }
 
 
     @PostMapping("/generate")
