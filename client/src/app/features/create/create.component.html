@@ -1,1 +1,30 @@
-<p>create works!</p>
+<app-page-layout>
+  <div class="max-w-2xl mx-auto py-5 flex flex-col gap-5">
+    <div>
+      <article class="bg-slate-800 rounded-lg p-5 flex flex-col gap-5">
+        <div>
+          <h2 class="text-xl font-semibold">Create A Quiz</h2>
+          <p class="text-slate-400">Enter a short prompt to generate a quiz</p>
+        </div>
+        <form>
+          <div class="relative">
+            <input
+              type="text"
+              class="border rounded border-slate-600 bg-inherit p-3 w-full"
+              placeholder="1998 Volkswagen facts"
+              [(ngModel)]="prompt"
+              name="promptInput"
+            />
+            <button
+              (click)="createQuiz($event)"
+              [disabled]="!prompt.length"
+              class="p-3 absolute right-0 top-1/2 -translate-y-1/2 hover:bg-slate-700 active:bg-slate-600 disabled:cursor-not-allowed disabled:bg-slate-700 rounded-r border-l border-slate-700 duration-200 ease-out w-24"
+            >
+              Create
+            </button>
+          </div>
+        </form>
+      </article>
+    </div>
+  </div>
+</app-page-layout>

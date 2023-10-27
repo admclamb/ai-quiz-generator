@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import { CreateComponent } from './create.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared';
-import { HomeComponent } from '../home/home.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CreateComponent],
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild([{ path: '', component: HomeComponent }]),
+    FormsModule,
+    RouterModule.forChild([{ path: '', component: CreateComponent }]),
   ],
 })
 export class CreateModule {}

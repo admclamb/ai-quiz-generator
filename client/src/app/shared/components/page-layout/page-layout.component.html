@@ -1,5 +1,9 @@
 <div class="min-h-screen flex flex-col">
-  <app-navbar></app-navbar>
-  <ng-content></ng-content>
+  <header>
+    <app-navbar></app-navbar>
+  </header>
+  <main>
+    <ng-content></ng-content>
+  </main>
   <!-- <app-navbar-mobile class="mt-auto"></app-navbar-mobile> -->
 </div>

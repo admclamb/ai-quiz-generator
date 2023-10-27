@@ -19,9 +19,9 @@ public class PromptDTO {
     }
 
     public String build() {
-        String formattedPrompt = prompt;
+        String formattedPrompt = "";
         if (useJsonOutput) {
-            formattedPrompt += " " + PromptLabels.SET_JSON_OUTPUT;
+            formattedPrompt += PromptLabels.SET_QUIZ_INSTRUCTIONS + PromptLabels.SET_JSON_OUTPUT + "The prompt should be: " + prompt;
         }
         return formattedPrompt;
     }
