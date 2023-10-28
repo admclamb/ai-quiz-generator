@@ -1,10 +1,9 @@
 package com.aiquizgenerator.backend.vendors.openai.services;
 
 import com.aiquizgenerator.backend.data.entities.Quiz;
+import com.aiquizgenerator.backend.vendors.openai.dtos.ChatRequest;
+import com.aiquizgenerator.backend.vendors.openai.dtos.ChatResponse;
 import com.aiquizgenerator.backend.vendors.openai.dtos.PromptDTO;
-import com.aiquizgenerator.backend.vendors.openai.dtos.ChatRequestDTO;
-import com.aiquizgenerator.backend.vendors.openai.dtos.ChatResponseDTO;
-import com.aiquizgenerator.backend.vendors.openai.exceptions.NoResponseFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class OpenaiService {
     @Value(("${openai.model}"))
     private String model;
 
-    @Value(("${openai.api.url"))
+    @Value(("${openai.api.url}"))
     private String apiUrl;
 
     private final ObjectMapper objectMapper;
@@ -32,21 +31,28 @@ public class OpenaiService {
         this.objectMapper = objectMapper;
     }
 
-    public Quiz generate(PromptDTO prompt) {
-        prompt.setResponseToJson();
-        ChatRequestDTO request = new ChatRequestDTO(model, prompt.build());
+    public String chat(String prompt) {
+        ChatRequest request = new ChatRequest(model, prompt);
 
-        ChatResponseDTO response = restTemplate.postForObject(apiUrl, request, ChatResponseDTO.class);
+        ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
 
         if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
-            throw new NoResponseFoundException();
+            return "No response";
         }
 
+        // return the first response
+        return response.getChoices().get(0).getMessage().getContent();
+    }
+
+    public Quiz generateQuiz(PromptDTO prompt) {
+        prompt.setResponseToJson();
         try {
-            String jsonResponse = response.getChoices().get(0).getMessage().getContent();
-            return objectMapper.readValue(jsonResponse, Quiz.class);
+            String response = chat(prompt.build());
+            System.out.print(response);
+            return objectMapper.readValue(response, Quiz.class);
         } catch(JsonProcessingException error) {
             return null;
         }
     }
+
 }

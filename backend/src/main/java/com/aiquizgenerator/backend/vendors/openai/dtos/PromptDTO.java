@@ -3,12 +3,8 @@ package com.aiquizgenerator.backend.vendors.openai.dtos;
 import com.aiquizgenerator.backend.vendors.openai.labels.PromptLabels;
 
 public class PromptDTO {
-    private final String prompt;
+    private String prompt;
     private boolean useJsonOutput = false;
-
-    public PromptDTO(String prompt) {
-        this.prompt = prompt;
-    }
 
     public String getPrompt() {
         return prompt;
@@ -19,9 +15,9 @@ public class PromptDTO {
     }
 
     public String build() {
-        String formattedPrompt = "";
+        String formattedPrompt = "Create a quiz with the prompt should be: " + prompt + ". ";
         if (useJsonOutput) {
-            formattedPrompt += PromptLabels.SET_QUIZ_INSTRUCTIONS + PromptLabels.SET_JSON_OUTPUT + "The prompt should be: " + prompt;
+            formattedPrompt += PromptLabels.SET_QUIZ_INSTRUCTIONS + PromptLabels.SET_JSON_OUTPUT;
         }
         return formattedPrompt;
     }

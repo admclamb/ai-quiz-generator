@@ -13,6 +13,7 @@ public class GeneratorService {
     private final QuizRepository quizRepository;
 
     public Quiz createQuiz(Quiz quiz) {
-        return quizRepository.save(quiz);
+        Quiz createdQuiz = quizRepository.save(quiz);
+        return createdQuiz;
     }
 }

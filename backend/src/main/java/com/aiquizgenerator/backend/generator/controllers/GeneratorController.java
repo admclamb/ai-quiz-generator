@@ -28,9 +28,9 @@ public class GeneratorController {
 
     @PostMapping("/generate")
     public Quiz generate(@RequestBody @Validated PromptDTO prompt) {
-        System.out.println("HERE");
         System.out.println((prompt));
-        Quiz generatedQuiz = openaiService.generate(prompt);
+        Quiz generatedQuiz = openaiService.generateQuiz(prompt);
+        System.out.println(generatedQuiz);
         return generatorService.createQuiz(generatedQuiz);
     }
 
