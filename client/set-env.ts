@@ -5,7 +5,6 @@ const path = require('path');
 dotenv.config();
 
 const environment = process.env['ENVIRONMENT'];
-console.log('ENVIROMENT: ', environment);
 
 const targetDir = path.join(__dirname, 'src/environments');
 const targetPath = path.join(

@@ -9,9 +9,11 @@ import com.aiquizgenerator.backend.generator.repositories.CategoryRepository;
 import com.aiquizgenerator.backend.generator.repositories.QuizQuestionAnswerRepository;
 import com.aiquizgenerator.backend.generator.repositories.QuizQuestionRepository;
 import com.aiquizgenerator.backend.generator.repositories.QuizRepository;
-import com.aiquizgenerator.backend.quiz.dtos.CreateQuizDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -21,10 +23,7 @@ public class GeneratorService {
     private final QuizQuestionAnswerRepository quizQuestionAnswerRepository;
     private final CategoryRepository categoryRepository;
 
-    public Quiz createQuiz(Quiz quiz) {
-        Quiz createdQuiz = quizRepository.save(quiz);
-        return createdQuiz;
-    }
+    public Quiz createQuiz(Quiz quiz) { return  quizRepository.save(quiz);}
 
     public QuizQuestion createQuestion(QuizQuestion quizQuestion) {
         return quizQuestionRepository.save(quizQuestion);
@@ -40,5 +39,13 @@ public class GeneratorService {
 
     public Category findCategoryByName(String name) {
         return categoryRepository.findByName(name);
+    }
+
+    public Iterable<Category> createCategories(Iterable<Category> categories) {
+        return categoryRepository.saveAll(categories);
+    }
+
+    public Iterable<QuizQuestionAnswer> createQuizQuestionAnswers(Iterable<QuizQuestionAnswer> answers) {
+        return quizQuestionAnswerRepository.saveAll(answers);
     }
 }

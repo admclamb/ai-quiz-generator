@@ -8,11 +8,9 @@ public class QuizQuestionAnswer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_question_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private QuizQuestion quizQuestion;
 
     private String answer;

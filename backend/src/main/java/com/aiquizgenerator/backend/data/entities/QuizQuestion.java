@@ -9,19 +9,17 @@ import java.util.Set;
 public class QuizQuestion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
 
     private String question;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Quiz quiz;
 
     @OneToMany(mappedBy = "quizQuestion", cascade = CascadeType.ALL)
     private Set<QuizQuestionAnswer> answers;
 
-    @OneToOne(mappedBy = "quizQuestion")
+    @OneToOne(mappedBy = "quizQuestion", cascade = CascadeType.ALL)
     private QuizQuestionAnswer correctAnswer;
 
     public Long getId() {
