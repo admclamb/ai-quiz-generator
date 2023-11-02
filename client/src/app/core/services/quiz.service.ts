@@ -13,7 +13,7 @@ export class QuizService {
 
   getQuizById(id: number): Observable<ApiResponseModel<QuizModel | null>> {
     const config: RequestConfigModel = {
-      url: `${env.api.serverUrl}/api/v1/quiz/find?${encodeURIComponent(id)}`,
+      url: `${env.api.serverUrl}/api/v1/quiz/find?id=${encodeURIComponent(id)}`,
       method: 'GET',
       headers: {
         'content-type': 'application/json',

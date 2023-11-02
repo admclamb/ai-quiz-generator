@@ -1,1 +1,8 @@
-<p>quiz works!</p>
+<app-page-layout>
+  <p *ngIf="loadingService.isLoading$ | async; else elseBlock">Loading...</p>
+  <ng-template #elseBlock>
+    <div class="max-w-2xl mx-auto p-5">
+      <article>Banananannananan</article>
+    </div>
+  </ng-template>
+</app-page-layout>

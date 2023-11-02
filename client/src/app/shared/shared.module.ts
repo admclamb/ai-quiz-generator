@@ -9,6 +9,7 @@ import { LogoutButtonComponent } from './components/buttons/logout-button.compon
 import { SignupButtonComponent } from './components/buttons/signup-button.component';
 import { NavbarMobileComponent } from './components/navbar/navbar-mobile/navbar-mobile.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { PageLayoutComponent } from './components/page-layout/page-layout.compon
     SignupButtonComponent,
     NavbarMobileComponent,
     PageLayoutComponent,
+    LoadingComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [...COMPONENTS],

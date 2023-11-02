@@ -62,7 +62,7 @@ public class QuizQuestion {
         return correctAnswer;
     }
 
-    public void set(String correctAnswer) {
+    public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 }
