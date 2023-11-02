@@ -1,25 +1,22 @@
 import { Injectable } from '@angular/core';
 import { ExternalApiService } from './external-api.service';
+import { Observable, mergeMap, of } from 'rxjs';
 import { ApiResponseModel, RequestConfigModel } from '../models';
 import { environment as env } from '../../../environments/environment';
 import { QuizModel } from '../models/quiz.model';
-import { Observable, mergeMap, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GeneratorService {
+export class QuizService {
   constructor(public externalApiService: ExternalApiService) {}
 
-  generateQuiz(prompt: string): Observable<ApiResponseModel<QuizModel | null>> {
+  getQuizById(id: number): Observable<ApiResponseModel<QuizModel | null>> {
     const config: RequestConfigModel = {
-      url: `${env.api.serverUrl}/api/v1/generator/generate`,
-      method: 'POST',
+      url: `${env.api.serverUrl}/api/v1/quiz/find?${encodeURIComponent(id)}`,
+      method: 'GET',
       headers: {
         'content-type': 'application/json',
-      },
-      body: {
-        prompt,
       },
     };
 

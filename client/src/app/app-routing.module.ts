@@ -17,6 +17,11 @@ const routes: Routes = [
       import('./features/create/create.module').then((m) => m.CreateModule),
   },
   {
+    path: '/quiz/:quizId',
+    loadChildren: () =>
+      import('./features/quiz/quiz.module').then((m) => m.QuizModule),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./features/not-found/not-found.module').then(

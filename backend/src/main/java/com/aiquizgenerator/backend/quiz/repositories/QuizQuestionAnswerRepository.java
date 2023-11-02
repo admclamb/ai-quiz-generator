@@ -1,4 +1,4 @@
-package com.aiquizgenerator.backend.generator.repositories;
+package com.aiquizgenerator.backend.quiz.repositories;
 
 import com.aiquizgenerator.backend.data.entities.QuizQuestionAnswer;
 import org.springframework.data.repository.CrudRepository;

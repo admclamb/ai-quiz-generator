@@ -1,5 +1,7 @@
 package com.aiquizgenerator.backend.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -13,14 +15,16 @@ public class QuizQuestion {
 
     private String question;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
     private Quiz quiz;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "quizQuestion", cascade = CascadeType.ALL)
     private Set<QuizQuestionAnswer> answers;
 
-    @OneToOne(mappedBy = "quizQuestion", cascade = CascadeType.ALL)
-    private QuizQuestionAnswer correctAnswer;
+    @Column(nullable = false)
+    private int correctAnswerIndex;
 
     public Long getId() {
         return id;
@@ -54,11 +58,11 @@ public class QuizQuestion {
         this.answers = answers;
     }
 
-    public QuizQuestionAnswer getCorrectAnswer() {
-        return correctAnswer;
+    public int getCorrectAnswerIndex() {
+        return correctAnswerIndex;
     }
 
-    public void setCorrectAnswer(QuizQuestionAnswer correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setCorrectAnswerIndex(int correctAnswer) {
+        this.correctAnswerIndex = correctAnswer;
     }
 }

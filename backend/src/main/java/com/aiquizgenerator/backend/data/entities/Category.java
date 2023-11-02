@@ -1,5 +1,6 @@
 package com.aiquizgenerator.backend.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -14,6 +15,7 @@ public class Category {
     @Column(unique = true)
     private String name;
 
+    @JsonBackReference
     @ManyToMany
     private Set<Quiz> quizes;
 

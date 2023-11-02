@@ -48,6 +48,7 @@ public class OpenaiService {
         prompt.setResponseToJson();
         try {
             String response = chat(prompt.build());
+            System.out.println("=> " + response + "<==");
             Quiz mappedQuiz = objectMapper.readValue(response, Quiz.class);
             mappedQuiz.setPrompt(prompt.getPrompt());
             return mappedQuiz;

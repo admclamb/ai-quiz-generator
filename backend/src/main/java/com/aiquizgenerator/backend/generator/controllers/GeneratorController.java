@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/generator")
+@RequestMapping("/api/v1/generator")
 @CrossOrigin(origins = "http://localhost:4040")
 public class GeneratorController {
 

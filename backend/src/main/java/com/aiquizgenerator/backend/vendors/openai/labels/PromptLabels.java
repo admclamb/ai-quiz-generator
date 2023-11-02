@@ -1,7 +1,7 @@
 package com.aiquizgenerator.backend.vendors.openai.labels;
 
 public class PromptLabels {
-    public static final String SET_JSON_OUTPUT = "Return the output in json format. The response should have a json property of category which is an array of the categories of where the quiz would be. The questions should have the properties of question, answers, and correct answer. The answer will be an object with property of answer being the answer. An example of the output for a quiz would be: {\n" +
+    public static final String SET_JSON_OUTPUT = "Return the output in json format. The response should have a json property of category which is an array of the categories of where the quiz would be. The questions should have the properties of question, answers, and correctAnswerIndex. The answer will be an int which is the index of the correct answer in the array of answers. Make sure the index starts at 0 and represents the first element of the array. An example of the output for a quiz would be: {\n" +
             "  \"category\": [\"Politics\", \"History\"],\n" +
             "  \"questions\": [\n" +
             "    {\n" +
@@ -12,7 +12,7 @@ public class PromptLabels {
             "        {\"answer\": \"Afghanistan\"},\n" +
             "        {\"answer\": \"Saudi Arabia\"}\n" +
             "      ],\n" +
-            "      \"correctAnswer\": {\"answer\": \"Pakistan\"}\n}" +
+            "      \"correctAnswerIndex\": 1" +
             "    },\n" +
             "}";
 

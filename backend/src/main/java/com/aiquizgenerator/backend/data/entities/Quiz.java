@@ -1,6 +1,7 @@
 package com.aiquizgenerator.backend.data.entities;
 
 import com.aiquizgenerator.backend.vendors.openai.labels.PromptLabels;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -20,10 +21,11 @@ public class Quiz {
     @Column(length = 100)
     private String prompt;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<QuizQuestion> questions;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Category> categories;
 
     public Long getId() {
