@@ -24,7 +24,7 @@ public class QuizQuestion {
     private Set<QuizQuestionAnswer> answers;
 
     @Column(nullable = false)
-    private int correctAnswerIndex;
+    private String correctAnswer;
 
     public Long getId() {
         return id;
@@ -58,11 +58,11 @@ public class QuizQuestion {
         this.answers = answers;
     }
 
-    public int getCorrectAnswerIndex() {
-        return correctAnswerIndex;
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setCorrectAnswerIndex(int correctAnswer) {
-        this.correctAnswerIndex = correctAnswer;
+    public void set(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
 }
