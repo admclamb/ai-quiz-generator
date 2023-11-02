@@ -1,6 +1,9 @@
 package com.aiquizgenerator.backend.data.entities;
 
+import com.aiquizgenerator.backend.vendors.openai.labels.PromptLabels;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
@@ -12,6 +15,9 @@ public class Quiz {
     private Long id;
 
 
+    @NotBlank
+    @Size(max = 100)
+    @Column(length = 100)
     private String prompt;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)

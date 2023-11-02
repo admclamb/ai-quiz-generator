@@ -22,7 +22,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain httpSecurity(final HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(authz -> authz
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/generator/**").permitAll()
                         .anyRequest().permitAll())
                 .cors(Customizer.withDefaults())

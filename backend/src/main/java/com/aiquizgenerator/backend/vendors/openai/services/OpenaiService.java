@@ -52,6 +52,7 @@ public class OpenaiService {
             mappedQuiz.setPrompt(prompt.getPrompt());
             return mappedQuiz;
         } catch (JsonProcessingException error) {
+            System.out.println(error.getMessage());
             return null;
         }
     }

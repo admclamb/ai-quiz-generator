@@ -1,8 +1,13 @@
 package com.aiquizgenerator.backend.vendors.openai.dtos;
 
 import com.aiquizgenerator.backend.vendors.openai.labels.PromptLabels;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class PromptDTO {
+
+    @NotBlank(message = PromptLabels.PROMPT_NOT_EMPTY)
+    @Size(max = 100, message = PromptLabels.MAX_PROMPT_SIZE)
     private String prompt;
     private boolean useJsonOutput = false;
 

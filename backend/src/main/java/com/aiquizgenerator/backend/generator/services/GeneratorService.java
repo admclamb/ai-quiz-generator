@@ -19,33 +19,6 @@ import java.util.Set;
 @Service
 public class GeneratorService {
     private final QuizRepository quizRepository;
-    private final QuizQuestionRepository quizQuestionRepository;
-    private final QuizQuestionAnswerRepository quizQuestionAnswerRepository;
-    private final CategoryRepository categoryRepository;
 
     public Quiz createQuiz(Quiz quiz) { return  quizRepository.save(quiz);}
-
-    public QuizQuestion createQuestion(QuizQuestion quizQuestion) {
-        return quizQuestionRepository.save(quizQuestion);
-    }
-
-    public QuizQuestionAnswer createQuizQuestionAnswer(QuizQuestionAnswer answer) {
-        return quizQuestionAnswerRepository.save(answer);
-    }
-
-    public Category createCategory(Category category) {
-        return categoryRepository.save(category);
-    }
-
-    public Category findCategoryByName(String name) {
-        return categoryRepository.findByName(name);
-    }
-
-    public Iterable<Category> createCategories(Iterable<Category> categories) {
-        return categoryRepository.saveAll(categories);
-    }
-
-    public Iterable<QuizQuestionAnswer> createQuizQuestionAnswers(Iterable<QuizQuestionAnswer> answers) {
-        return quizQuestionAnswerRepository.saveAll(answers);
-    }
 }
