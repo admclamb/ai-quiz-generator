@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -32,6 +35,8 @@ public class GeneratorController {
         if (generatedQuiz == null) {
             throw new NoQuizFoundException();
         }
+        generatedQuiz.setCreatedAt(LocalDateTime.now());
+        generatedQuiz.setUpdatedAt(LocalDateTime.now());
         return generatorService.createQuiz(generatedQuiz);
     }
 }
