@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,12 +30,12 @@ public class QuizController  {
     private final QuizService quizService;
 
     @GetMapping()
-    public Page<Quiz> listQuizes(
+    public Map<String, Object> listQuizes(
             @Valid @ModelAttribute PaginationDTO paginationDTO
     ) {
-        if(isInFuture(paginationDTO.getTimestamp())) {
-            throw new FutureDateException();
-        }
+//        if(isInFuture(paginationDTO.getTimestamp())) {
+//            throw new FutureDateException();
+//        }
         return quizService.findAllPaginated(paginationDTO);
     }
 
@@ -47,6 +48,8 @@ public class QuizController  {
 
     private Boolean isInFuture(LocalDateTime timestamp) {
         LocalDateTime currentDateTime = LocalDateTime.now();
+        System.out.println(currentDateTime.getHour() + "  " +  currentDateTime.getMinute());
+        System.out.println(timestamp.getHour() + "  " +  timestamp.getMinute());
         return timestamp.isAfter(currentDateTime);
     }
 }

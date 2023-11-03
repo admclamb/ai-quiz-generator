@@ -1,0 +1,84 @@
+<app-error-alert [error]="error" class="mb-5"></app-error-alert>
+<section>
+  <nav>
+    <ul></ul>
+  </nav>
+  <article><ng-content></ng-content></article>
+  <div>
+    <ul class="flex justify-between items-center">
+      <li class="relative">
+        <button
+          class="bg-slate-800 p-2 rounded hover:bg-slate-700 active:bg-slate-600 duration-200 ease-in disabled:bg-slate-800 disabled:cursor-not-allowed"
+          (click)="toggleSizeDropdown()"
+        >
+          {{ size }} / page <i class="ml-1 fa-solid fa-chevron-down"></i>
+        </button>
+        <ul
+          *ngIf="isSizeDropdownOpen"
+          class="absolute top-[110%] left-[0%] bg-slate-800 rounded p-1.5 flex flex-col gap-1.5"
+          (clickOutside)="closeSizeDropdown()"
+        >
+          <li>
+            <button
+              class="flex px-2.5 py-1.5 w-32 rounded hover:bg-slate-700 active:bg-slate-600 duration-200 ease-out"
+              (click)="changeSize(20)"
+            >
+              20 / page
+              <span *ngIf="size === 20" class="ml-auto"
+                ><i class="fa-solid fa-check text-purple-300"></i
+              ></span>
+            </button>
+          </li>
+          <li>
+            <button
+              class="flex px-2.5 py-1.5 w-32 rounded hover:bg-slate-700 active:bg-slate-600 duration-200 ease-out"
+              (click)="changeSize(50)"
+            >
+              50 / page<span *ngIf="size === 50" class="ml-auto"
+                ><i class="fa-solid fa-check text-purple-300"></i
+              ></span>
+            </button>
+          </li>
+          <li>
+            <button
+              class="flex px-2.5 py-1.5 w-32 rounded hover:bg-slate-700 active:bg-slate-600 duration-200 ease-out"
+              (click)="changeSize(100)"
+            >
+              100 / page<span *ngIf="size === 100" class="ml-auto"
+                ><i class="fa-solid fa-check text-purple-300"></i
+              ></span>
+            </button>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <ul class="flex gap-2 h-full">
+          <li>
+            <button
+              class="bg-slate-800 px-2.5 py-1.5 h-full rounded hover:bg-slate-700 active:bg-slate-600 duration-200 ease-in disabled:bg-slate-800 disabled:cursor-not-allowed"
+              [disabled]="page === 1"
+            >
+              <i class="ml-1 fa-solid fa-chevron-left"></i>
+            </button>
+          </li>
+          <li>
+            <button
+              class="bg-slate-800 px-2.5 py-1.5 h-full rounded hover:bg-slate-700 active:bg-slate-600 duration-200 ease-in disabled:bg-slate-700 disabled:cursor-not-allowed"
+              [disabled]="true"
+            >
+              {{ page }}
+            </button>
+          </li>
+          <li>
+            <button
+              class="bg-slate-800 px-2.5 py-1.5 h-full rounded hover:bg-slate-700 active:bg-slate-600 duration-200 ease-in disabled:bg-slate-800 disabled:cursor-not-allowed"
+              [disabled]="page === totalPages"
+            >
+              <i class="ml-1 fa-solid fa-chevron-right"></i>
+            </button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</section>

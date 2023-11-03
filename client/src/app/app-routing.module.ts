@@ -11,6 +11,12 @@ const routes: Routes = [
       import('./features/home/home.module').then((m) => m.HomeModule),
   },
   {
+    path: 'browse',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./features/browse/browse.module').then((m) => m.BrowseModule),
+  },
+  {
     path: 'create',
     pathMatch: 'full',
     loadChildren: () =>
