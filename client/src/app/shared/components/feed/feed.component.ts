@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { AppErrorModel } from '@app/core';
+import * as dayjs from 'dayjs';
 import { QuizModel } from 'src/app/core/models/quiz.model';
+import { LoadingService } from 'src/app/core/services/loading.service';
 import { QuizService } from 'src/app/core/services/quiz.service';
 
 @Component({
@@ -21,7 +23,10 @@ export class FeedComponent {
 
   currentTimestamp: Date = new Date();
 
-  constructor(public quizService: QuizService) {}
+  constructor(
+    public quizService: QuizService,
+    public loadingService: LoadingService
+  ) {}
 
   ngOnInit() {
     this.fetchQuizes();
@@ -46,7 +51,7 @@ export class FeedComponent {
       .subscribe((response) => {
         const { data, error } = response;
         if (data) {
-          this.quizes.push(...data.content);
+          this.quizes = data.content;
           if (data.page >= data.totalPages) {
             this.isEnd = false;
           }

@@ -11,7 +11,6 @@ import { NavbarMobileComponent } from './components/navbar/navbar-mobile/navbar-
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { FeedComponent } from './components/feed/feed.component';
-import { FeedPaginatorComponent } from './components/feed/feed-paginator/feed-paginator.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { FeedPaginatorComponent } from './components/feed/feed-paginator/feed-pa
     PageLayoutComponent,
     LoadingComponent,
     FeedComponent,
-    FeedPaginatorComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [...COMPONENTS],

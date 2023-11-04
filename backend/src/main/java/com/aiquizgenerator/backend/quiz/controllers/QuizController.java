@@ -33,9 +33,6 @@ public class QuizController  {
     public Map<String, Object> listQuizes(
             @Valid @ModelAttribute PaginationDTO paginationDTO
     ) {
-//        if(isInFuture(paginationDTO.getTimestamp())) {
-//            throw new FutureDateException();
-//        }
         return quizService.findAllPaginated(paginationDTO);
     }
 
@@ -44,12 +41,5 @@ public class QuizController  {
         Quiz foundQuiz = quizService.findOneByIdWithoutAnswers(id);
         foundQuiz.getQuestions().forEach(question -> question.setCorrectAnswer(null));
         return foundQuiz;
-    }
-
-    private Boolean isInFuture(LocalDateTime timestamp) {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        System.out.println(currentDateTime.getHour() + "  " +  currentDateTime.getMinute());
-        System.out.println(timestamp.getHour() + "  " +  timestamp.getMinute());
-        return timestamp.isAfter(currentDateTime);
     }
 }

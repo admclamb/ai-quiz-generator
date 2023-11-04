@@ -5,6 +5,4 @@ import { LoadingService } from 'src/app/core/services/loading.service';
   selector: 'app-loading',
   templateUrl: './loading.component.html',
 })
-export class LoadingComponent {
-  constructor(public loadingService: LoadingService) {}
-}
+export class LoadingComponent {}

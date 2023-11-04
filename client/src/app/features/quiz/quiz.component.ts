@@ -23,7 +23,7 @@ export class QuizComponent {
       const quizId: string | null = params.get('quizId');
       if (quizId) {
         this.quizService.getQuizById(parseInt(quizId)).subscribe((response) => {
-          console.log(response);
+          this.quiz = response.data;
         });
       }
     });

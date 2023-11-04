@@ -1,8 +1,20 @@
 <app-page-layout>
-  <p *ngIf="loadingService.isLoading$ | async; else elseBlock">Loading...</p>
-  <ng-template #elseBlock>
-    <div class="max-w-2xl mx-auto p-5">
-      <article>Banananannananan</article>
+  <div class="max-w-2xl mx-auto py-5">
+    <div
+      *ngIf="loadingService.isLoading$ | async; else elseBlock"
+      class="flex items-center justify-center"
+    >
+      <app-loading></app-loading>
     </div>
-  </ng-template>
+    <ng-template #elseBlock>
+      <div *ngIf="quiz; elseBlock">
+        <article class="border p-5 border border-slate-700 rounded -p-5">
+          <h3 class="text-xl font-semibold">{{ quiz.prompt }}</h3>
+        </article>
+      </div>
+      <ng-template #elseBlock>
+        <p>Error getting quiz.</p>
+      </ng-template>
+    </ng-template>
+  </div>
 </app-page-layout>

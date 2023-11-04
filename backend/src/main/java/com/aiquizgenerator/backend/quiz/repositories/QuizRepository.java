@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
 
-    @Query("SELECT q FROM Quiz q WHERE q.createdAt >= :timestamp ORDER BY q.createdAt DESC")
+    @Query("SELECT q FROM Quiz q WHERE q.createdAt <= :timestamp ORDER BY q.createdAt DESC")
     Page<Quiz> findAllBeforeTimestamp(Pageable page, LocalDateTime timestamp);
 }

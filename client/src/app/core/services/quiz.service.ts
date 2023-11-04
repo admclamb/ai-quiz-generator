@@ -17,7 +17,6 @@ export class QuizService {
     size: number,
     timestamp: Date
   ): Observable<ApiResponseModel<PaginationResponseModel<QuizModel> | null>> {
-    console.log('TIME: ', timestamp.toISOString());
     const config: RequestConfigModel = {
       url: `${env.api.serverUrl}/api/v1/quiz?page=${encodeURIComponent(
         page

@@ -1,9 +1,37 @@
-<app-error-alert [error]="error" class="mb-5"></app-error-alert>
-<section>
+<section class="flex flex-col gap-5">
+  <app-error-alert [error]="error" *ngIf="error"></app-error-alert>
   <nav>
     <ul></ul>
   </nav>
-  <article><ng-content></ng-content></article>
+  <section
+    *ngIf="loadingService.isLoading$ | async; else elseBlock"
+    class="p-5 flex justify-center items-center"
+  >
+    <app-loading></app-loading>
+  </section>
+  <ng-template #elseBlock>
+    <section>
+      <ul class="flex flex-col gap-5">
+        <li *ngFor="let quiz of quizes">
+          <div class="border rounded border-slate-700 p-5 flex flex-col gap-5">
+            <div>
+              <h4 class="text-lg font-semibold">{{ quiz.prompt }}</h4>
+            </div>
+            <ul class="flex block">
+              <li>
+                <a
+                  [routerLink]="'/quiz/' + quiz.id"
+                  class="border block rounded p-3 border-slate-700 duration-200 ease-out hover:bg-slate-800 active:bg-slate-700"
+                  >Go to Quiz</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </ng-template>
+
   <div>
     <ul class="flex justify-between items-center">
       <li class="relative">
