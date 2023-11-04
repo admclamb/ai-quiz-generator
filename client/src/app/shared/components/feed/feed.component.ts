@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { AppErrorModel } from '@app/core';
-import * as dayjs from 'dayjs';
 import { QuizModel } from 'src/app/core/models/quiz.model';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { QuizService } from 'src/app/core/services/quiz.service';

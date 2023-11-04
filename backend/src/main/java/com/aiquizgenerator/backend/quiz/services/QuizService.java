@@ -25,7 +25,7 @@ public class QuizService {
     }
 
     @Transactional
-    public Quiz findOneByIdWithoutAnswers(Long id) {
+    public Quiz findOneById(Long id) {
         return quizRepository.findById(id).orElse(null);
     }
 }

@@ -15,6 +15,7 @@ export class QuizQuestionComponent {
   @Output() selectQuestionAnswer = new EventEmitter<number>();
 
   selectAnswer(index: number) {
+    console.log(this.question);
     this.selectQuestionAnswer.emit(index);
   }
 }

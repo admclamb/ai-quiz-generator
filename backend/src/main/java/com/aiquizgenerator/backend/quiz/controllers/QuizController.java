@@ -3,7 +3,11 @@ package com.aiquizgenerator.backend.quiz.controllers;
 import com.aiquizgenerator.backend.common.pagination.dtos.PaginationDTO;
 import com.aiquizgenerator.backend.common.pagination.labels.PaginationLabels;
 import com.aiquizgenerator.backend.data.entities.Quiz;
+import com.aiquizgenerator.backend.data.entities.QuizQuestion;
+import com.aiquizgenerator.backend.data.entities.QuizQuestionAnswer;
 import com.aiquizgenerator.backend.quiz.exceptions.FutureDateException;
+import com.aiquizgenerator.backend.quiz.exceptions.QuizQuestionAnswerNotFoundException;
+import com.aiquizgenerator.backend.quiz.exceptions.QuizQuestionNotFoundException;
 import com.aiquizgenerator.backend.quiz.labels.QuizLabels;
 import com.aiquizgenerator.backend.quiz.services.QuizService;
 import jakarta.validation.Valid;
@@ -18,9 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,8 +40,34 @@ public class QuizController  {
 
     @GetMapping("/find")
     public Quiz findById(@RequestParam @NotBlank(message = QuizLabels.QUIZ_ID_NOT_EMPTY) Long id) {
-        Quiz foundQuiz = quizService.findOneByIdWithoutAnswers(id);
+        Quiz foundQuiz = quizService.findOneById(id);
         foundQuiz.getQuestions().forEach(question -> question.setCorrectAnswer(null));
         return foundQuiz;
+    }
+
+    @GetMapping("/check-answer")
+    public Boolean checkAnswer(@RequestParam(required = true)Long quizId,@RequestParam(required = true) Long questionId,@RequestParam(required = true) Long answerId) {
+        Quiz foundQuiz = quizService.findOneById(quizId);
+        QuizQuestion foundQuestion = findQuestion(foundQuiz.getQuestions(), questionId);
+        QuizQuestionAnswer foundAnswer = findAnswer(foundQuestion.getAnswers(), answerId);
+        return Objects.equals(foundAnswer.getAnswer(), foundQuestion.getCorrectAnswer());
+    }
+
+    private QuizQuestion findQuestion(Set<QuizQuestion> questions, Long questionId) throws QuizQuestionNotFoundException {
+        for (QuizQuestion question : questions) {
+            if (question.getId().equals(questionId)) {
+                return question;
+            }
+        }
+        throw new QuizQuestionNotFoundException();
+    }
+
+    private QuizQuestionAnswer findAnswer(Set<QuizQuestionAnswer> answers, Long answerId) throws QuizQuestionAnswerNotFoundException {
+        for (QuizQuestionAnswer answer: answers) {
+            if (answer.getId().equals(answerId)) {
+                return answer;
+            }
+        }
+        throw new QuizQuestionAnswerNotFoundException();
     }
 }

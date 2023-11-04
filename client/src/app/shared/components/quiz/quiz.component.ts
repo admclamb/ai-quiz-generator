@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { QuestionModel } from 'src/app/core/models/question.model';
 import { QuizModel } from 'src/app/core/models/quiz.model';
+import { QuizService } from 'src/app/core/services/quiz.service';
 
 @Component({
   selector: 'app-quiz',
@@ -14,6 +15,8 @@ export class QuizComponent {
   isGameOver: boolean = false;
   currentQuestion: number = 0;
 
+  constructor(private readonly quizService: QuizService) {}
+
   changeToNextQuestion() {
     this.currentQuestion++;
     if (!this.questions[this.currentQuestion]) {
@@ -22,5 +25,10 @@ export class QuizComponent {
     }
   }
 
-  selectAnswer(index: number) {}
+  selectAnswer(answer: any) {
+    console.log(answer);
+    // const selectedAnswer = this.questions.answers[index];
+    // console.log(selectedAnswer);
+    // this.quizService.checkAnswer
+  }
 }
