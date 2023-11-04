@@ -11,6 +11,8 @@ import { NavbarMobileComponent } from './components/navbar/navbar-mobile/navbar-
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { FeedComponent } from './components/feed/feed.component';
+import { QuizQuestionComponent } from './components/quiz/quiz-question/quiz-question.component';
+import { QuizComponent } from './components/quiz/quiz.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { FeedComponent } from './components/feed/feed.component';
     PageLayoutComponent,
     LoadingComponent,
     FeedComponent,
+    QuizQuestionComponent,
+    QuizComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [...COMPONENTS],

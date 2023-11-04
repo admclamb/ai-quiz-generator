@@ -11,7 +11,14 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     SharedModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: QuizComponent }]),
+    RouterModule.forChild([
+      { path: '', component: QuizComponent },
+      {
+        path: 'play',
+        loadChildren: () =>
+          import('./play/play.module').then((m) => m.PlayModule),
+      },
+    ]),
   ],
 })
 export class QuizModule {}

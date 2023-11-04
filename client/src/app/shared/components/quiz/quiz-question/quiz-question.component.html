@@ -1,0 +1,21 @@
+<section class="flex flex-col gap-5">
+  <header class="flex flex-col gap-5 p-5">
+    <h6 class="text-xl font-semibold">
+      Question {{ currentQuestionIndex + 1 }}/<span
+        class="text-base font-light"
+        >{{ totalAmountOfQuestions }}</span
+      >
+    </h6>
+    <p class="text-lg font-semibold">{{ question.question }}</p>
+  </header>
+  <ul class="p-5 flex flex-col gap-5">
+    <li *ngFor="let answer of question.answers; let i = index">
+      <button
+        class="border rounded border-slate-700 p-3 w-full hover:bg-slate-800 active:bg-slate-700 duration-200 ease-out"
+        (click)="selectAnswer(i)"
+      >
+        {{ answer.answer }}
+      </button>
+    </li>
+  </ul>
+</section>

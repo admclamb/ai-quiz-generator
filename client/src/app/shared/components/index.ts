@@ -7,6 +7,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { NAVBAR_COMPONENTS } from './navbar';
 import { PageLayoutComponent } from './page-layout/page-layout.component';
 import { PageLoaderComponent } from './page-loader.component';
+import { QUIZ_COMPONENTS } from './quiz';
 
 export const COMPONENTS = [
   Auth0FeatureComponent,
@@ -18,4 +19,5 @@ export const COMPONENTS = [
   PageLayoutComponent,
   FeedComponent,
   LoadingComponent,
+  QUIZ_COMPONENTS,
 ];

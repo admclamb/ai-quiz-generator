@@ -1,0 +1,12 @@
+<section *ngIf="!isGameOver; else elseBlock">
+  <section *ngIf="hasGameStarted; else nestedElseBlock">
+    <app-quiz-question
+      [question]="questions[currentQuestion]"
+      [currentQuestionIndex]="currentQuestion"
+      [totalAmountOfQuestions]="questions.length"
+      (selectQuestionAnswer)="selectAnswer($event)"
+    ></app-quiz-question>
+  </section>
+  <ng-template #nestedElseBlock><p>Game not started</p></ng-template>
+</section>
+<ng-template #elseBlock><p>Game over</p></ng-template>
