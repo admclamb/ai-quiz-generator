@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppErrorModel } from '@app/core';
 import { GeneratorService } from 'src/app/core/services/generator.service';
 import { Component } from '@angular/core';
+import { LoadingService } from 'src/app/core/services/loading.service';
 
 @Component({
   selector: 'app-create',
@@ -14,7 +15,8 @@ export class CreateComponent {
 
   constructor(
     private readonly generatorService: GeneratorService,
-    private router: Router
+    private router: Router,
+    public loadingService: LoadingService
   ) {}
 
   createQuiz(event: Event) {

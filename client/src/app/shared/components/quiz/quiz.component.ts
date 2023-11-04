@@ -14,7 +14,7 @@ export class QuizComponent {
   isGameOver: boolean = false;
   currentQuestion: number = 0;
 
-  quizGrade: QuizGradeModel[] = [];
+  quizGrades: QuizGradeModel[] = [];
 
   changeToNextQuestion() {
     this.currentQuestion++;
@@ -25,7 +25,12 @@ export class QuizComponent {
   }
 
   gradeAnswer(grade: QuizGradeModel) {
-    this.quizGrade.push(grade);
+    this.quizGrades.push(grade);
     this.changeToNextQuestion();
+  }
+
+  getScore() {
+    const correctAnswers = this.quizGrades.filter((grade) => grade.isCorrect);
+    return correctAnswers.length / this.quizGrades.length;
   }
 }

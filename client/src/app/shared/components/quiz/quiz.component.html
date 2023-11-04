@@ -10,4 +10,16 @@
   </section>
   <ng-template #nestedElseBlock><p>Game not started</p></ng-template>
 </section>
-<ng-template #elseBlock><p>Game over</p></ng-template>
+<ng-template #elseBlock
+  ><p>SCORE {{ getScore() * 100 }}%</p>
+  <ul>
+    <li *ngFor="let grade of quizGrades">
+      <h5 class="text-lg font-semibold">{{ grade.question.question}}</h5>
+      <p>
+        <ng-container *ngIf="grade.isCorrect; else gradeResultBlock">Correct</ng-container>
+        <ng-template #gradeResultBlock>Incorrect</ng-template>
+      </p>
+    </li>
+  </ul>
+  </ng-template
+>
