@@ -8,7 +8,7 @@
     </div>
     <ng-template #elseBlock>
       <div *ngIf="quiz">
-        <app-quiz [questions]="quiz.questions"></app-quiz>
+        <app-quiz [questions]="quiz.questions" [quizId]="quiz.id"></app-quiz>
       </div>
     </ng-template>
   </div>

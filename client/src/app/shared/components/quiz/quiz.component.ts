@@ -1,21 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { QuestionModel } from 'src/app/core/models/question.model';
-import { QuizModel } from 'src/app/core/models/quiz.model';
-import { QuizService } from 'src/app/core/services/quiz.service';
+import { QuizGradeModel } from 'src/app/core/models/quiz-grade.model';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.css'],
 })
 export class QuizComponent {
   @Input() questions!: QuestionModel[];
+  @Input() quizId!: number;
 
   hasGameStarted: boolean = true;
   isGameOver: boolean = false;
   currentQuestion: number = 0;
 
-  constructor(private readonly quizService: QuizService) {}
+  quizGrade: QuizGradeModel[] = [];
 
   changeToNextQuestion() {
     this.currentQuestion++;
@@ -25,10 +24,9 @@ export class QuizComponent {
     }
   }
 
-  selectAnswer(answer: any) {
-    console.log(answer);
-    // const selectedAnswer = this.questions.answers[index];
-    // console.log(selectedAnswer);
-    // this.quizService.checkAnswer
+  gradeAnswer(quizGrade: QuizGradeModel) {
+    console.log('HERE');
+    console.log('GRADE: ', quizGrade);
+    this.quizGrade.push(quizGrade);
   }
 }

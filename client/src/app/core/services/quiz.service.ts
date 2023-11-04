@@ -82,7 +82,6 @@ export class QuizService {
     return this.externalApiService.callExternalApi(config).pipe(
       mergeMap((response) => {
         const { data, error } = response;
-
         return of({
           data: data ? (data as boolean) : null,
           error,

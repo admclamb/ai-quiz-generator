@@ -1,4 +1,5 @@
 <section class="flex flex-col gap-5">
+  <app-error-alert [error]="error" *ngIf="error"></app-error-alert>
   <header class="flex flex-col gap-5 p-5">
     <h6 class="text-xl font-semibold">
       Question {{ currentQuestionIndex + 1 }}/<span
@@ -12,7 +13,7 @@
     <li *ngFor="let answer of question.answers; let i = index">
       <button
         class="border rounded border-slate-700 p-3 w-full hover:bg-slate-800 active:bg-slate-700 duration-200 ease-out"
-        (click)="selectAnswer(answer)"
+        (click)="checkAnswer(answer)"
       >
         {{ answer.answer }}
       </button>

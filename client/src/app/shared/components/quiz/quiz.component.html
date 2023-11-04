@@ -4,7 +4,8 @@
       [question]="questions[currentQuestion]"
       [currentQuestionIndex]="currentQuestion"
       [totalAmountOfQuestions]="questions.length"
-      (selectQuestionAnswer)="selectAnswer($event)"
+      [quizId]="quizId"
+      (gradeAnswer)="gradeAnswer($event)"
     ></app-quiz-question>
   </section>
   <ng-template #nestedElseBlock><p>Game not started</p></ng-template>
