@@ -46,11 +46,13 @@ public class QuizController  {
     }
 
     @GetMapping("/check-answer")
-    public Boolean checkAnswer(@RequestParam(required = true)Long quizId,@RequestParam(required = true) Long questionId,@RequestParam(required = true) Long answerId) {
+    public Map<String, Boolean> checkAnswer(@RequestParam(required = true)Long quizId,@RequestParam(required = true) Long questionId,@RequestParam(required = true) Long answerId) {
         Quiz foundQuiz = quizService.findOneById(quizId);
         QuizQuestion foundQuestion = findQuestion(foundQuiz.getQuestions(), questionId);
         QuizQuestionAnswer foundAnswer = findAnswer(foundQuestion.getAnswers(), answerId);
-        return Objects.equals(foundAnswer.getAnswer(), foundQuestion.getCorrectAnswer());
+        Map<String, Boolean> output = new HashMap<>();
+        output.put("isCorrect", Objects.equals(foundAnswer.getAnswer(), foundQuestion.getCorrectAnswer()));
+        return output;
     }
 
     private QuizQuestion findQuestion(Set<QuizQuestion> questions, Long questionId) throws QuizQuestionNotFoundException {

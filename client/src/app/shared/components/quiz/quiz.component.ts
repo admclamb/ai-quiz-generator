@@ -20,13 +20,12 @@ export class QuizComponent {
     this.currentQuestion++;
     if (!this.questions[this.currentQuestion]) {
       this.hasGameStarted = false;
-      this.isGameOver = false;
+      this.isGameOver = true;
     }
   }
 
-  gradeAnswer(quizGrade: QuizGradeModel) {
-    console.log('HERE');
-    console.log('GRADE: ', quizGrade);
-    this.quizGrade.push(quizGrade);
+  gradeAnswer(grade: QuizGradeModel) {
+    this.quizGrade.push(grade);
+    this.changeToNextQuestion();
   }
 }

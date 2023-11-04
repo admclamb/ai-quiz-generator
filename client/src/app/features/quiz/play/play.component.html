@@ -1,15 +1,13 @@
 <app-page-layout>
   <div class="max-w-2xl mx-auto py-5">
     <div
-      *ngIf="loadingService.isLoading$ | async; else elseBlock"
+      *ngIf="loadingService.isLoading$ | async"
       class="flex items-center justify-center"
     >
       <app-loading></app-loading>
     </div>
-    <ng-template #elseBlock>
-      <div *ngIf="quiz">
-        <app-quiz [questions]="quiz.questions" [quizId]="quiz.id"></app-quiz>
-      </div>
-    </ng-template>
+    <div *ngIf="quiz">
+      <app-quiz [questions]="quiz.questions" [quizId]="quiz.id"></app-quiz>
+    </div>
   </div>
 </app-page-layout>

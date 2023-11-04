@@ -66,7 +66,7 @@ export class QuizService {
     quizId: number,
     questionId: number,
     answerId: number
-  ): Observable<ApiResponseModel<boolean | null>> {
+  ): Observable<ApiResponseModel<{ isCorrect: boolean } | null>> {
     const config: RequestConfigModel = {
       url: `${
         env.api.serverUrl
@@ -83,7 +83,7 @@ export class QuizService {
       mergeMap((response) => {
         const { data, error } = response;
         return of({
-          data: data ? (data as boolean) : null,
+          data: data ? (data as { isCorrect: boolean }) : null,
           error,
         });
       })

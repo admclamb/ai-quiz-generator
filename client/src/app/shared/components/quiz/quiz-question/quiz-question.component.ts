@@ -3,7 +3,6 @@ import { QuestionAnswerModel } from 'src/app/core/models/question-answer.model';
 import { QuestionModel } from 'src/app/core/models/question.model';
 import { QuizService } from 'src/app/core/services/quiz.service';
 import { AppErrorModel } from '@app/core';
-import { QuizGradeModel } from 'src/app/core/models/quiz-grade.model';
 
 @Component({
   selector: 'app-quiz-question',
@@ -17,28 +16,26 @@ export class QuizQuestionComponent {
 
   error: AppErrorModel | null = null;
 
-  @Output() gradeAnswer = new EventEmitter<QuizGradeModel>();
+  @Output() gradeAnswer: EventEmitter<any> = new EventEmitter();
 
   constructor(private quizService: QuizService) {}
 
   checkAnswer(answer: QuestionAnswerModel) {
-    console.log('CLICKED: ', answer);
     this.error = null;
     this.quizService
       .checkAnswer(this.quizId, this.question.id, answer.id)
       .subscribe((response) => {
         const { data, error } = response;
-        console.log(data);
+        if (data) {
+          this.gradeAnswer.emit({
+            question: this.question,
+            answer: answer,
+            isCorrect: data.isCorrect,
+          });
+        }
         if (error) {
           this.error = error;
         }
-        const answerResponse = {
-          question: this.question,
-          answer: answer,
-          isCorrect: data === true,
-        };
-        console.log(answerResponse);
-        this.gradeAnswer.emit(answerResponse);
       });
   }
 }
