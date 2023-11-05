@@ -1,10 +1,11 @@
 package com.aiquizgenerator.backend.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "quiz_question_grade")
-public class QuizQuestionGrade {
+public class QuizGradeQuestion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,4 +18,8 @@ public class QuizQuestionGrade {
     private QuizQuestionAnswer answer;
 
     private Boolean isCorrect;
+
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
+    private QuizGrade quizGrade;
 }

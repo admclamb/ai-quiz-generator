@@ -19,15 +19,8 @@ import java.time.LocalDateTime;
 @RequestMapping("/api/v1/generator")
 @CrossOrigin(origins = "http://localhost:4040")
 public class GeneratorController {
-
     private final GeneratorService generatorService;
-
     private final OpenaiService openaiService;
-
-    @GetMapping()
-    public String test() {
-        return "This is a test";
-    }
 
     @PostMapping("/generate")
     public Quiz generate(@RequestBody @Valid PromptDTO prompt) {
