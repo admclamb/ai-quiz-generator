@@ -1,3 +1,5 @@
-export const environment = {
-  production: true,
+import { environment as env } from './environment';
+
+export const environment: any = {
+  ...env,
 };
