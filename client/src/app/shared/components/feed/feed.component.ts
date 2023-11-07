@@ -17,7 +17,7 @@ export class FeedComponent {
   @Input() totalPages: number = 1;
   @Input() isEnd: boolean = false;
 
-  @Input() size: number = 10;
+  @Input() size: number = 20;
   isSizeDropdownOpen: boolean = false;
 
   currentTimestamp: Date = new Date();
@@ -40,11 +40,14 @@ export class FeedComponent {
     this.size = newSize;
     this.isSizeDropdownOpen = false;
     this.quizes = [];
+    this.page = 1;
+    this.totalPages = 1;
     this.fetchQuizes();
   }
 
   fetchQuizes() {
     this.error = null;
+    console.log(this.page);
     this.quizService
       .getQuizesPageable(this.page, this.size, this.currentTimestamp)
       .subscribe((response) => {
@@ -54,6 +57,7 @@ export class FeedComponent {
           if (data.page >= data.totalPages) {
             this.isEnd = false;
           }
+          this.totalPages = data.totalPages;
         }
         if (error) {
           this.error = error;
