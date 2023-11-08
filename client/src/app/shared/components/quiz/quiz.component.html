@@ -5,6 +5,7 @@
       [currentQuestionIndex]="currentQuestion"
       [totalAmountOfQuestions]="questions.length"
       [quizId]="quizId"
+      [gradeId]="gradeId"
       (gradeAnswer)="gradeAnswer($event)"
     ></app-quiz-question>
   </section>
@@ -13,13 +14,14 @@
 <ng-template #elseBlock
   ><p>SCORE {{ getScore() * 100 }}%</p>
   <ul>
-    <li *ngFor="let grade of quizGrades">
-      <h5 class="text-lg font-semibold">{{ grade.question.question}}</h5>
+    <li *ngFor="let grade of quizGrades.grades">
+      <h5 class="text-lg font-semibold">{{ grade.question.question }}</h5>
       <p>
-        <ng-container *ngIf="grade.isCorrect; else gradeResultBlock">Correct</ng-container>
+        <ng-container *ngIf="grade.isCorrect; else gradeResultBlock"
+          >Correct</ng-container
+        >
         <ng-template #gradeResultBlock>Incorrect</ng-template>
       </p>
     </li>
   </ul>
-  </ng-template
->
+</ng-template>

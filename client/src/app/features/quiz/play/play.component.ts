@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AppErrorModel } from '@app/core';
+import { QuizGradeModel } from 'src/app/core/models/quiz-grade.model';
 import { QuizModel } from 'src/app/core/models/quiz.model';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { QuizService } from 'src/app/core/services/quiz.service';
@@ -10,7 +12,8 @@ import { QuizService } from 'src/app/core/services/quiz.service';
   styleUrls: ['./play.component.css'],
 })
 export class PlayComponent {
-  quiz: QuizModel | null = null;
+  quizGrade: QuizGradeModel | null = null;
+  error: AppErrorModel | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,11 +23,18 @@ export class PlayComponent {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      const quizId: string | null = params.get('quizId');
-      if (quizId) {
-        this.quizService.getQuizById(parseInt(quizId)).subscribe((response) => {
-          this.quiz = response.data;
-        });
+        const gradeId: string | null = params.get('gradeId');
+        if (gradeId) {
+          this.quizService.getGrade(parseInt(gradeId)).subscribe((response) => {
+            const { data, error } = response;
+            if (data) {
+              this.quizGrade = data;
+            }
+            if (error) {
+              this.error = error;
+            }
+          });
+        }
       }
     });
   }

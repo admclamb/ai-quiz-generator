@@ -5,6 +5,8 @@ import { ApiResponseModel, RequestConfigModel } from '../models';
 import { environment as env } from '../../../environments/environment';
 import { QuizModel } from '../models/quiz.model';
 import { PaginationResponseModel } from '../models/pagination-response.model';
+import { QuizGradeModel } from '../models/quiz-grade.model';
+import { QuizGradeQuestionModel } from '../models/quiz-grade-question.model';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +58,79 @@ export class QuizService {
 
         return of({
           data: data ? (data as QuizModel) : null,
+          error,
+        });
+      })
+    );
+  }
+
+  getGrade(
+    gradeId: number
+  ): Observable<ApiResponseModel<QuizGradeModel | null>> {
+    const config: RequestConfigModel = {
+      url: `${env.api.serverUrl}/api/v1/grade/find?id=${encodeURIComponent(
+        gradeId
+      )}`,
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+      },
+    };
+
+    return this.externalApiService.callExternalApi(config).pipe(
+      mergeMap((response) => {
+        const { data, error } = response;
+        return of({
+          data: data ? (data as QuizGradeModel) : null,
+          error,
+        });
+      })
+    );
+  }
+
+  startQuiz(
+    quizId: number
+  ): Observable<ApiResponseModel<QuizGradeModel | null>> {
+    const config: RequestConfigModel = {
+      url: `${env.api.serverUrl}/api/v1/grade/create`,
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: {
+        quizId,
+      },
+    };
+
+    return this.externalApiService.callExternalApi(config).pipe(
+      mergeMap((response) => {
+        const { data, error } = response;
+        return of({
+          data: data ? (data as QuizGradeModel) : null,
+          error,
+        });
+      })
+    );
+  }
+
+  addGradeToQuiz(gradeId: number, grade: QuizGradeQuestionModel) {
+    const config: RequestConfigModel = {
+      url: `${env.api.serverUrl}/api/v1/grade/add`,
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: {
+        gradeId,
+        grade,
+      },
+    };
+
+    return this.externalApiService.callExternalApi(config).pipe(
+      mergeMap((response) => {
+        const { data, error } = response;
+        return of({
+          data: data ? (data as QuizGradeModel) : null,
           error,
         });
       })

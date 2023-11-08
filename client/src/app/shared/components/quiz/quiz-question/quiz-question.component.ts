@@ -13,6 +13,7 @@ export class QuizQuestionComponent {
   @Input() currentQuestionIndex!: number;
   @Input() totalAmountOfQuestions!: number;
   @Input() quizId!: number;
+  @Input() gradeId!: number;
 
   error: AppErrorModel | null = null;
 

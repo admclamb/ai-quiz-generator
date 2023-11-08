@@ -1,12 +1,12 @@
 package com.aiquizgenerator.backend.grade.dtos;
 
-import com.aiquizgenerator.backend.grade.labels.GradeLabels;
-import jakarta.validation.constraints.NotBlank;
+import com.aiquizgenerator.backend.grade.labels.QuizGradeLabels;
+import jakarta.validation.constraints.NotNull;
 
 public class QuizGradeDTO {
 
     private Long id;
-    @NotBlank(message = GradeLabels.QUIZ_ID_NOT_EMPTY)
+    @NotNull(message = QuizGradeLabels.QUIZ_ID_NOT_EMPTY)
     private Long quizId;
 
     public Long getQuizId() {

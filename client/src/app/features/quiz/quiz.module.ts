@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       { path: '', component: QuizComponent },
       {
-        path: 'play',
+        path: 'play/:gradeId',
         loadChildren: () =>
           import('./play/play.module').then((m) => m.PlayModule),
       },
