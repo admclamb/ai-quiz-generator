@@ -1,27 +1,32 @@
 <section *ngIf="!isGameOver; else elseBlock">
+  <app-error-alert *ngIf="error" [error]="error"></app-error-alert>
   <section *ngIf="hasGameStarted; else nestedElseBlock">
-    <app-quiz-question
-      [question]="questions[currentQuestion]"
-      [currentQuestionIndex]="currentQuestion"
-      [totalAmountOfQuestions]="questions.length"
-      [quizId]="quizId"
-      [gradeId]="gradeId"
-      (gradeAnswer)="gradeAnswer($event)"
-    ></app-quiz-question>
-  </section>
-  <ng-template #nestedElseBlock><p>Game not started</p></ng-template>
-</section>
-<ng-template #elseBlock
-  ><p>SCORE {{ getScore() * 100 }}%</p>
-  <ul>
-    <li *ngFor="let grade of quizGrades.grades">
-      <h5 class="text-lg font-semibold">{{ grade.question.question }}</h5>
-      <p>
-        <ng-container *ngIf="grade.isCorrect; else gradeResultBlock"
-          >Correct</ng-container
+    <header class="flex flex-col gap-5 p-5">
+      <h6 class="text-xl font-semibold">
+        Question {{ calculateCurrentQuestion()
+        }}<span class="text-base font-light"
+          >/{{ calculateTotalQuestions() }}</span
         >
-        <ng-template #gradeResultBlock>Incorrect</ng-template>
-      </p>
-    </li>
-  </ul>
+      </h6>
+    </header>
+    <app-quiz-question
+      *ngIf="currentQuestion"
+      [question]="currentQuestion"
+      [correctAnswer]="correctAnswer"
+      [incorrectAnswer]="incorrectAnswer"
+      (gradeAnswer)="gradeAnswer($event)"
+    >
+    </app-quiz-question>
+  </section>
+  <ng-template #nestedElseBlock>
+    <div class="flex justify-center items-center p-5">
+      <app-quiz-countdown
+        [seconds]="0"
+        (onZero)="startGame()"
+      ></app-quiz-countdown>
+    </div>
+  </ng-template>
+</section>
+<ng-template #elseBlock>
+  <p>Game over</p>
 </ng-template>

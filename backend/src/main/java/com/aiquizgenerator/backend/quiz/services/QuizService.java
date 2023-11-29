@@ -20,8 +20,8 @@ public class QuizService {
 
     public Map<String, Object> findAllPaginated(PaginationDTO paginationDTO) {
         Pageable paging = PageRequest.of(paginationDTO.getPage() - 1, paginationDTO.getSize());
-        Page<Quiz> quizes = quizRepository.findAllBeforeTimestamp(paging, paginationDTO.getTimestamp());
-        return PaginationMapper.map(quizes);
+        Page<Quiz> quizzes = quizRepository.findAllBeforeTimestamp(paging, paginationDTO.getTimestamp());
+        return PaginationMapper.map(quizzes);
     }
 
     @Transactional

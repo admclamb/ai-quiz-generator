@@ -1,5 +1,6 @@
 package com.aiquizgenerator.backend.vendors.openai.services;
 
+import com.aiquizgenerator.backend.data.entities.Category;
 import com.aiquizgenerator.backend.data.entities.Quiz;
 import com.aiquizgenerator.backend.vendors.openai.dtos.ChatRequest;
 import com.aiquizgenerator.backend.vendors.openai.dtos.ChatResponse;
@@ -12,8 +13,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class OpenaiService {
+
+    @Autowired
+    private OpenaiCrudService openaiCrudService;
+
     @Qualifier("openaiRestTemplate")
     @Autowired
     private RestTemplate restTemplate;
@@ -48,12 +55,24 @@ public class OpenaiService {
         prompt.setResponseToJson();
         try {
             String response = chat(prompt.build());
+            System.out.println("RESPONSE => " + response);
             Quiz mappedQuiz = objectMapper.readValue(response, Quiz.class);
             mappedQuiz.setPrompt(prompt.getPrompt());
             return mappedQuiz;
         } catch (JsonProcessingException error) {
             System.out.println(error.getMessage());
             return null;
+        }
+    }
+
+    private List<Category> saveCategories(List<Category> categories) {
+        for(Category category: categories) {
+            try {
+                Category savedOrFoundCategory = openaiCrudService.findOrSaveCategory(category);
+                category.setId(savedOrFoundCategory.getId());
+            } catch(Exception e) {
+                throw e;
+            }
         }
     }
 

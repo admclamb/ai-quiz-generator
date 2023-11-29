@@ -1,6 +1,5 @@
 package com.aiquizgenerator.backend.vendors.openai.testfixtures;
 
-import com.aiquizgenerator.backend.data.entities.Quiz;
 import com.aiquizgenerator.backend.vendors.openai.dtos.PromptDTO;
 import com.aiquizgenerator.backend.vendors.openai.services.OpenaiService;
 import org.mockito.Mockito;

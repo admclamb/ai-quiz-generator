@@ -113,7 +113,10 @@ export class QuizService {
     );
   }
 
-  addGradeToQuiz(gradeId: number, grade: QuizGradeQuestionModel) {
+  addGradeToQuiz(
+    gradeId: number,
+    gradeQuestion: QuizGradeQuestionModel
+  ): Observable<ApiResponseModel<QuizGradeQuestionModel | null>> {
     const config: RequestConfigModel = {
       url: `${env.api.serverUrl}/api/v1/grade/add`,
       method: 'POST',
@@ -122,7 +125,7 @@ export class QuizService {
       },
       body: {
         gradeId,
-        grade,
+        gradeQuestion,
       },
     };
 
@@ -130,7 +133,7 @@ export class QuizService {
       mergeMap((response) => {
         const { data, error } = response;
         return of({
-          data: data ? (data as QuizGradeModel) : null,
+          data: data ? (data as QuizGradeQuestionModel) : null,
           error,
         });
       })

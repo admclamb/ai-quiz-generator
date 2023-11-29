@@ -4,14 +4,17 @@
     <ul></ul>
   </nav>
   <section
-    *ngIf="loadingService.isLoading$ | async; else elseBlock"
+    *ngIf="loadingService.isLoading$ | async; else isNotLoading"
     class="p-5 flex justify-center items-center"
   >
     <app-loading></app-loading>
   </section>
-  <ng-template #elseBlock>
+  <ng-template #isNotLoading>
     <section>
-      <ul class="flex flex-col gap-5">
+      <ul
+        class="flex flex-col gap-5"
+        *ngIf="quizes.length > 0; else noQuizAvailable"
+      >
         <li *ngFor="let quiz of quizes">
           <div class="border rounded border-slate-700 p-5 flex flex-col gap-5">
             <div>
@@ -29,6 +32,9 @@
           </div>
         </li>
       </ul>
+      <ng-template #noQuizAvailable>
+        <p class="py-5 text-lg font-semibold">No quizes available</p>
+      </ng-template>
     </section>
   </ng-template>
 

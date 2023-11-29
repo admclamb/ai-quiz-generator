@@ -17,7 +17,7 @@
             />
             <button
               (click)="createQuiz($event)"
-              [disabled]="!prompt.length"
+              [disabled]="(loadingService.isLoading$ | async) || !prompt"
               class="p-3 absolute right-0 top-1/2 -translate-y-1/2 hover:bg-slate-700 active:bg-slate-600 disabled:cursor-not-allowed disabled:bg-slate-700 rounded-r border-l border-slate-700 duration-200 ease-out w-24"
             >
               <ng-container

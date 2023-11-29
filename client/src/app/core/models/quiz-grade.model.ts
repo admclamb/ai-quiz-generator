@@ -4,8 +4,8 @@ import { QuizGradeQuestionModel } from './quiz-grade-question.model';
 import { QuizModel } from './quiz.model';
 
 export interface QuizGradeModel {
-  id?: number;
+  id: number;
   isQuizComplete: boolean;
-  quiz?: QuizModel;
-  grades: QuizGradeQuestionModel[];
+  quiz: QuizModel;
+  quizGradeQuestions: QuizGradeQuestionModel[];
 }

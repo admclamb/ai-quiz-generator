@@ -34,5 +34,21 @@ export class CreateComponent {
         }
       });
     }
+
+    const example = {
+      categories: [{ name: 'History' }, { name: 'Military' }, { name: 'WW2' }],
+      questions: [
+        {
+          question: 'When was WW2?',
+          answers: [
+            { answer: 'September 1, 1939' },
+            { answer: 'January 2, 2001' },
+            { answer: 'May 4, 1998' },
+            { answer: 'October 4, 1900' },
+          ],
+          correctAnswer: 'September 1, 1939',
+        },
+      ],
+    };
   }
 }

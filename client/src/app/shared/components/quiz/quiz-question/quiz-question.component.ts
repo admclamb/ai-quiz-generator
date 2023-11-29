@@ -10,33 +10,12 @@ import { AppErrorModel } from '@app/core';
 })
 export class QuizQuestionComponent {
   @Input() question!: QuestionModel;
-  @Input() currentQuestionIndex!: number;
-  @Input() totalAmountOfQuestions!: number;
-  @Input() quizId!: number;
-  @Input() gradeId!: number;
+  @Input() correctAnswer: QuestionModel | null = null;
+  @Input() incorrectAnswer: QuestionModel | null = null;
 
-  error: AppErrorModel | null = null;
-
-  @Output() gradeAnswer: EventEmitter<any> = new EventEmitter();
-
-  constructor(private quizService: QuizService) {}
+  @Output() gradeAnswer: EventEmitter<QuestionAnswerModel> = new EventEmitter();
 
   checkAnswer(answer: QuestionAnswerModel) {
-    this.error = null;
-    this.quizService
-      .checkAnswer(this.quizId, this.question.id, answer.id)
-      .subscribe((response) => {
-        const { data, error } = response;
-        if (data) {
-          this.gradeAnswer.emit({
-            question: this.question,
-            answer: answer,
-            isCorrect: data.isCorrect,
-          });
-        }
-        if (error) {
-          this.error = error;
-        }
-      });
+    this.gradeAnswer.emit(answer);
   }
 }

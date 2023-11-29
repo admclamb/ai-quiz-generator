@@ -13,6 +13,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { QuizQuestionComponent } from './components/quiz/quiz-question/quiz-question.component';
 import { QuizComponent } from './components/quiz/quiz.component';
+import { QuizCountdownComponent } from './components/quiz/quiz-countdown/quiz-countdown.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { QuizComponent } from './components/quiz/quiz.component';
     FeedComponent,
     QuizQuestionComponent,
     QuizComponent,
+    QuizCountdownComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [...COMPONENTS],
