@@ -18,10 +18,10 @@ public class Quiz {
     @Column(nullable = false, length = 100)
     private String prompt;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany( fetch = FetchType.LAZY, mappedBy = "quiz")
     private List<Question> questions;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     private List<Category> categories;
 
     @CreatedDate

@@ -14,12 +14,12 @@ public class Question {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference
+    @JoinColumn(name = "quiz_id", nullable = false)
     private Quiz quiz;
 
     private String question;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany( fetch = FetchType.LAZY, mappedBy = "question")
     private List<Answer> answers;
 
     @Column(nullable = false)

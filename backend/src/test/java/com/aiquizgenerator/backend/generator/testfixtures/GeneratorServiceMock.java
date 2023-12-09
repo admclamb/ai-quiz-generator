@@ -1,5 +1,6 @@
 package com.aiquizgenerator.backend.generator.testfixtures;
 
+import com.aiquizgenerator.backend.data.entities.Quiz;
 import com.aiquizgenerator.backend.generator.services.GeneratorService;
 import org.mockito.Mockito;
 

@@ -1,6 +1,8 @@
 package com.aiquizgenerator.backend.vendors.openai.services;
 
+import com.aiquizgenerator.backend.data.entities.Answer;
 import com.aiquizgenerator.backend.data.entities.Category;
+import com.aiquizgenerator.backend.data.entities.Question;
 import com.aiquizgenerator.backend.data.entities.Quiz;
 import com.aiquizgenerator.backend.vendors.openai.dtos.ChatRequest;
 import com.aiquizgenerator.backend.vendors.openai.dtos.ChatResponse;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -57,6 +60,14 @@ public class OpenaiService {
             String response = chat(prompt.build());
             System.out.println("RESPONSE => " + response);
             Quiz mappedQuiz = objectMapper.readValue(response, Quiz.class);
+            saveCategories(mappedQuiz.getCategories());
+            for (Question question: mappedQuiz.getQuestions()) {
+                System.out.println(question.getQuestion());
+                System.out.println("=================================");
+                for (Answer answer: question.getAnswers()) {
+                    System.out.println(answer.getAnswer());
+                }
+            }
             mappedQuiz.setPrompt(prompt.getPrompt());
             return mappedQuiz;
         } catch (JsonProcessingException error) {
@@ -65,15 +76,10 @@ public class OpenaiService {
         }
     }
 
-    private List<Category> saveCategories(List<Category> categories) {
+    private void saveCategories(List<Category> categories) {
         for(Category category: categories) {
-            try {
                 Category savedOrFoundCategory = openaiCrudService.findOrSaveCategory(category);
                 category.setId(savedOrFoundCategory.getId());
-            } catch(Exception e) {
-                throw e;
-            }
         }
     }
-
 }

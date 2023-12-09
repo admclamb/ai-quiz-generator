@@ -15,7 +15,7 @@ public class Grade {
     @ManyToOne
     private Quiz quiz;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "grade")
     private List<GradedAnswer> gradedAnswers;
 
     @Column(nullable = false)
