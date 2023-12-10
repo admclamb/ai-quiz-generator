@@ -18,7 +18,7 @@ public class Quiz {
     @Column(nullable = false, length = 100)
     private String prompt;
 
-    @OneToMany( fetch = FetchType.LAZY, mappedBy = "quiz")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "quiz")
     private List<Question> questions;
 
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
